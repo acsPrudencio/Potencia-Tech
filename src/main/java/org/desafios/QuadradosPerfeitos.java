@@ -1,13 +1,12 @@
 package org.desafios;
 
-import javax.swing.text.html.parser.Parser;
 import java.util.*;
 
 
 public class QuadradosPerfeitos {
     public static void main(String[] args) {
-//        int n = Integer.parseInt(new Scanner(System.in).nextLine());
-        int n = 12;
+        int n = Integer.parseInt(new Scanner(System.in).nextLine());
+//        int n = 10;
         int[] d = new int[n + 1];
         List<Integer> numeros = new ArrayList<>();
 
@@ -19,21 +18,23 @@ public class QuadradosPerfeitos {
                 numeros.add(i);
             }
         }
-        int i = 1;
-        int contador = 0;
-        while (soma!=n){
-            int valor = numeros.get(numeros.size()-i);
-            if (soma < n){
-                soma += valor;
-                contador++;
-            }
-            if (soma > n){
-                soma -= valor;
-                i++;
-                contador--;
-            }
-        }
+        int somas = n;
 
-        System.out.println(contador);
+        for (int i = 0; i< numeros.size(); i++){
+            int aux = n;
+            int contador = 0;
+
+            for (int x = i+1; x <= numeros.size(); x++) {
+                while (aux - numeros.get(numeros.size()-x) >= 0){
+                    aux -= numeros.get(numeros.size()-x);
+                    contador++;
+                }
+            }
+            if (contador<somas){
+                somas = contador;
+            }
+
+        }
+        System.out.println(somas);
     }
 }
